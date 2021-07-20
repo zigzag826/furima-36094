@@ -2,39 +2,38 @@
 
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| name               | string | null: false |
-| last_name          | string | null: false |
-| first_name	       | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | date   | null: false |
+| Column             | Type   | Options                  |
+| ------------------ | ------ | ------------------------ |
+| email              | string | null: false unique: true |
+| encrypted_password | string | null: false              |
+| name               | string | null: false              |
+| last_name          | string | null: false              |
+| first_name	       | string | null: false              |
+| last_name_kana     | string | null: false              |
+| first_name_kana    | string | null: false              |
+| birthday           | date   | null: false              |
 
 ### Association
 - has_many :items
 - has_many :orders
-- has_many :addresses
 
 ## items テーブル
 
-| Column              | Type       | Options            |
-| ------------------  | ---------- | ------------------ |
-| products            | string     | null: false        |
-| text                | text       | null: false        |
-| category            | text       | null: false        |
-| status              | text       | null: false        |
-| shipping-fee-status | integer    | null: false        |
-| prefecture          | integer    | null: false        |
-| scheduled-delivery  | integer    | null: false        |
-| price               | integer    | null: false        |
+| Column                 | Type       | Options            |
+| ---------------------- | ---------- | ------------------ |
+| users                  | references | foreign_key: true  |
+| products               | string     | null: false        |
+| text                   | text       | null: false        |
+| category_id            | integer    | null: false        |
+| status_id              | integer    | null: false        |
+| shipping-fee-status_id | integer    | null: false        |
+| prefecture_id          | integer    | null: false        |
+| scheduled-delivery_id  | integer    | null: false        |
+| price                  | integer    | null: false        |
 
 ### Association
 - belongs_to :user
 - has_one    :order
-- belongs_to :addresses
 
 ## orders テーブル
 
@@ -53,13 +52,12 @@
 | Column              | Type       | Options            |
 | ------------------- | ---------- | ------------------ |
 | postcode            | string     | null: false        |
-| prefecture          | integer    | null: false        |
+| prefecture_id       | integer    | null: false        |
 | city                | string     | null: false        |
 | block               | string     | null: false        |
 | building            | string     |                    |
 | phone_number        | string     | null: false        |
+| orders              | references | foreign_key: true  |
 
 ### Association
-- belongs_to :user
-- has_many   :items
-- has_many   :orders
+- belongs_to :orders
