@@ -21,7 +21,7 @@
 
 | Column                 | Type       | Options            |
 | ---------------------- | ---------- | ------------------ |
-| users                  | references | foreign_key: true  |
+| user                  | references | foreign_key: true  |
 | products               | string     | null: false        |
 | text                   | text       | null: false        |
 | category_id            | integer    | null: false        |
@@ -57,7 +57,7 @@
 | block               | string     | null: false        |
 | building            | string     |                    |
 | phone_number        | string     | null: false        |
-| orders              | references | foreign_key: true  |
+| order              | references | foreign_key: true  |
 
 ### Association
-- belongs_to :orders
+- belongs_to :order
