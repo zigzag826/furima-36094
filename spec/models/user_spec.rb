@@ -3,13 +3,14 @@ RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:user)
   end
-  describe '#create' do
-
+  describe 'ユーザー登録' do
+    context 'ユーザー登録ができる場合' do
       it "全ての項目の入力が存在すれば登録できること" do
         @user
         expect(@user).to be_valid
       end
-
+    end
+    context 'ユーザー登録ができない場合' do
       it "nameが空の場合は登録できないこと" do 
         @user.name = '' 
         @user.valid? 
@@ -97,10 +98,23 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
 
-      it 'passwordは半角英数字混合でないと登録できないこと' do
+      it 'passwordは数字のみでは登録できないこと' do
         @user.password = '1234567'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+
+      it 'passwordは全角では登録できないこと' do
+        @user.password = '1234ABC'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+
+      it 'passwordは英字のみでは登録できないこと' do
+        @user.password = 'abcdefg'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+    end
   end
 end
