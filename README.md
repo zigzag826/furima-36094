@@ -21,14 +21,14 @@
 
 | Column                 | Type       | Options            |
 | ---------------------- | ---------- | ------------------ |
-| user                  | references | foreign_key: true  |
+| user                   | references | foreign_key: true  |
 | products               | string     | null: false        |
 | text                   | text       | null: false        |
 | category_id            | integer    | null: false        |
 | status_id              | integer    | null: false        |
-| shipping-fee-status_id | integer    | null: false        |
+| shipping_fee_status_id | integer    | null: false        |
 | prefecture_id          | integer    | null: false        |
-| scheduled-delivery_id  | integer    | null: false        |
+| scheduled_delivery_id  | integer    | null: false        |
 | price                  | integer    | null: false        |
 
 ### Association
