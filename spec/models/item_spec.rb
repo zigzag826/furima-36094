@@ -11,10 +11,16 @@ RSpec.describe Item, type: :model do
       end
     end
     context '商品出品ができない場合' do
+      it "ユーザーの情報がない場合登録できないこと" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
       it "imageが空の場合は登録できないこと" do 
-        @item.products = '' 
+        @item.image = nil 
         @item.valid? 
-        expect(@item.errors.full_messages).to include("Products can't be blank")
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
       it "productsが空の場合は登録できないこと" do 
@@ -67,27 +73,33 @@ RSpec.describe Item, type: :model do
       end
 
       it "priceが300以下の場合は登録できないこと" do 
-        @item.price = '299' 
+        @item.price = 299
         @item.valid? 
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it "priceが10000000以上の場合は登録できないこと" do 
-        @item.price = '10000000' 
+        @item.price = 10000000 
         @item.valid? 
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it "priceが全角数字の場合は登録できないこと" do 
-        @item.price = '５００' 
+        @item.price = '５００'
         @item.valid? 
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
 
       it "priceが英字の場合は登録できないこと" do 
         @item.price = 'abc' 
         @item.valid? 
-        expect(@item.errors.full_messages).to include("Price is not included in the list")
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it "priceが半角英数混合の場合は登録できないこと" do 
+        @item.price = 'abc123' 
+        @item.valid? 
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
   end

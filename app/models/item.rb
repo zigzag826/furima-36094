@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   with_options presence: true do
+    validates :image
     validates :products
     validates :text
     validates :price, inclusion: { in: 300..9999999 }
@@ -11,6 +12,7 @@ class Item < ApplicationRecord
       validates :scheduled_delivery_id
     end
   end
+  validates :price, numericality: { only_integer: true }
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
@@ -18,6 +20,6 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
   belongs_to :user
-  has_one    :order
+  #has_one    :order
   has_one_attached :image
 end

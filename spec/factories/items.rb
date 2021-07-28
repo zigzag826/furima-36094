@@ -8,11 +8,11 @@ FactoryBot.define do
 
     products                   {'テスト１'}
     text                       {'商品説明です'}
-    category_id                {'2'}
-    status_id                  {'2'}
-    shipping_fee_status_id     {'2'}
-    prefecture_id              {'2'}
-    scheduled_delivery_id      {'2'}
-    price                      {'500'}
+    category_id                {2}
+    status_id                  {2}
+    shipping_fee_status_id     {2}
+    prefecture_id              {2}
+    scheduled_delivery_id      {2}
+    price                      {500}
   end
 end
