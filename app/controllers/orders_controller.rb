@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
-  before_action move_to_index, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @order_address = OrderAddress.new
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
   def move_to_index
